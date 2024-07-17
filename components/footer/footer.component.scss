@@ -1,0 +1,109 @@
+@import "/src/styles/colors";
+@import "/src/styles/breakpoint";
+@import "/src/styles/mixins/breakpoints";
+
+a {
+  color: white;
+}
+
+.footer {
+  color: white;
+  padding: 3.5rem 0;
+  ul {
+    padding: 0;
+    list-style: none;
+    span {
+      font-weight: 600;
+    }
+    span.ul-title {
+      @include media-breakpoint-down($md) {
+        font-size: 1.5rem;
+      }
+    }
+    li {
+      display: flex;
+      padding: 0.5rem 0;
+      a {
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 400;
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.social-media {
+  border: solid 1px white;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
+  &:hover {
+    background-color: white;
+  }
+}
+
+.white-separator {
+  border-bottom: solid 1px white;
+  margin: 0 auto 1rem auto;
+  width: 60px;
+}
+
+.footer-copyright {
+  font-size: 12px;
+  filter: brightness(90%);
+  color: white;
+  padding: 0.5rem 0;
+  margin-bottom: 0;
+}
+
+.small-text {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  i {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.extra-small-text {
+  font-size: 12px;
+}
+
+.fw-medium {
+  font-weight: 500 !important;
+}
+
+.footer.psMode {
+  background-color: $primary;
+  .social-media:hover {
+    i {
+      color: $primary;
+    }
+  }
+}
+
+.footer.hostMode {
+  background-color: $secondary;
+  .social-media:hover {
+    i {
+      color: $secondary;
+    }
+  }
+}
+
+.footer-copyright {
+  &.psMode {
+    background-color: $primary;
+  }
+  &.hostMode {
+    background-color: $secondary;
+  }
+}

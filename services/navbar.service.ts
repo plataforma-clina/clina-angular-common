@@ -1,0 +1,28 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class NavbarService {
+  constructor(private http: HttpClient) {}
+
+  getCoordinates(city: string, state: string, district?: string) {
+    return this.http.get<any>(
+      `${environment.restUrl}/maps/coordinates?address=${district}&city=${city}&state=${state}`
+    );
+  }
+
+  getAddressAutoComplete(input: string) {
+    return this.http.get<any>(
+      `${environment.restUrl}/maps/autocomplete?input=${input}`
+    );
+  }
+
+  getCoordinatesByPlaceId(placeId: string) {
+    return this.http.get<any>(
+      `${environment.restUrl}/maps/coordinates?placeId=${placeId}`
+    );
+  }
+}

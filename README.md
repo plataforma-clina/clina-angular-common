@@ -1,1 +1,0 @@
-# clina-angular-common

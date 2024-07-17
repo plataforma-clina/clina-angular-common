@@ -1,0 +1,29 @@
+<div class="input-container" [ngClass]="{focused, selected}">
+  <label>{{ label }}</label>
+
+  <input
+    type="text"
+    [attr.id]="inputId"
+    [placeholder]="focused ? (selected?.label ? selected?.label : '') : selected?.label ? selected?.label : label"
+    [(ngModel)]="keyword"
+    (ngModelChange)="change()"
+    (click)="open()"
+    (focus)="open()"
+    (blur)="close()"
+  />
+
+  <button type="button" class="close clear" aria-label="Close" (click)="clear()" [hidden]="!selected">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="list" *ngIf="show">
+  <div
+    class="list-item"
+    [ngClass]="{ 'bg-primary text-white': selected?.value && item.value === selected?.value }"
+    *ngFor="let item of list"
+    (click)="select(item)"
+  >
+    {{ item.label }}
+  </div>
+</div>

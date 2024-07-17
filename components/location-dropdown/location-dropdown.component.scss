@@ -1,0 +1,132 @@
+@import "/src/styles/colors";
+@import "/src/styles/breakpoint";
+@import "/src/styles/mixins/breakpoints";
+
+:host {
+  width: 100%;
+  @include media-breakpoint-up($md) {
+    width: 330px;
+  }
+  @include media-breakpoint-up($lg) {
+    width: 440px;
+  }
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  label {
+    font-size: 14px;
+    display: none;
+    margin-left: 10px;
+    background-color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: absolute;
+    color: $primary;
+    border-radius: 10px;
+    margin-top: -8px;
+  }
+  input {
+    border: solid 1px $gray-300;
+    padding-left: 15px;
+    padding-right: 20px;
+    max-width: 100%;
+    width: 100% !important;
+    height: 44px;
+    border-radius: 22px;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.input-container.focused {
+  label {
+    display: block;
+  }
+  input {
+    border-color: $primary;
+  }
+}
+
+.input-container.selected:not(.focused) {
+  input {
+    border-color: $primary;
+    &::placeholder {
+      color: $primary;
+      opacity: 1;
+    }
+  }
+}
+
+input {
+  border-radius: 10px;
+}
+
+.clear {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  font-size: 1.5rem;
+  font-weight: 100;
+  background-color: transparent;
+  border: none;
+  span {
+    padding-top: 0.1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    color: $gray-500;
+    &:hover {
+      color: $gray-900;
+    }
+  }
+}
+
+.list {
+  position: absolute;
+  width: 560px;
+  margin: 5px 10px 0 10px;
+  max-height: 300px;
+  overflow: auto;
+  box-shadow: 0 0 10px 0 #aaa;
+  z-index: 2;
+  @include media-breakpoint-down($md) {
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+.list-item {
+  cursor: pointer;
+  line-height: 44px;
+  padding: 10px;
+  background-color: white;
+  color: $gray-500;
+  line-height: 24px;
+  &:hover {
+    background-color: $primary-light;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $gray-100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $primary-medium;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primary;
+}

@@ -1,0 +1,80 @@
+<ul
+  id="sidebar"
+  [ngClass]="{
+    show: showNavbar,
+    hostMode: accessMode === AccessModeEnum.HOST,
+    psMode: AccessModeEnum.HEALTH_PERSON
+  }"
+>
+  <div class="_sidebar_brand">
+    <div>
+      <img src="images/branding/logo-white.svg" (click)="goToHome()" />
+      <span class="close-sidebar" (click)="hideSidebar()">&times;</span>
+    </div>
+  </div>
+  <div class="items-container">
+    <li
+      [style]="item.show ? 'display: block' : 'display: none'"
+      *ngFor="let item of items; let i = index"
+    >
+      <div
+        class="d-flex justify-content-between w-100 p-3"
+        [class._active]="item.isActive"
+        (click)="goToPage(item)"
+      >
+        <div class="d-flex align-items-center">
+          <img [src]="item.img" />
+          <a class="ms-3 item-label">{{ item.title }}</a>
+        </div>
+      </div>
+    </li>
+
+    @if (accessMode === AccessModeEnum.HEALTH_PERSON) {
+    <li class="access-mode-container">
+      <div
+        class="d-flex access-mode-button align-items-center p-1"
+        (click)="toggleAccessMode(AccessModeEnum.HOST)"
+      >
+        <div class="_images_icon">
+          <img src="images/sidebar/icon-toggle-mode-white.svg" />
+        </div>
+        <span class="item-label d-flex justify-content-center"
+          >Modo anfitrião</span
+        >
+      </div>
+    </li>
+    } @else {
+    <li class="access-mode-container">
+      <div
+        class="d-flex access-mode-button align-items-center p-1"
+        (click)="toggleAccessMode(AccessModeEnum.HEALTH_PERSON)"
+      >
+        <div class="_images_icon">
+          <img src="images/sidebar/icon-toggle-mode-white.svg" />
+        </div>
+        <span
+          class="item-label d-flex justify-content-center"
+          style="line-height: 15px"
+          >Modo profiss.<br />
+          da saúde</span
+        >
+      </div>
+    </li>
+    }
+
+    <li class="logout-container">
+      <div class="d-flex logout-button p-1" (click)="logout()">
+        <div class="_images_icon">
+          <img src="images/sidebar/icon-logout-white.svg" />
+        </div>
+        <span class="item-label d-flex justify-content-center">Sair</span>
+      </div>
+    </li>
+  </div>
+</ul>
+
+<div
+  id="sidebar-backdrop"
+  [ngClass]="{ show: showNavbar }"
+  (click)="hideSidebar()"
+></div>

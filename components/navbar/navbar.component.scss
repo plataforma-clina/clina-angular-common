@@ -1,0 +1,112 @@
+@import "/src/styles/colors";
+@import "/src/styles/breakpoint";
+@import "/src/styles/mixins/breakpoints";
+
+:host {
+  z-index: 2;
+  @include media-breakpoint-up($lg) {
+    position: fixed;
+    width: 100vw;
+    z-index: 3;
+  }
+}
+
+#navbar {
+  display: flex;
+  width: 100vw;
+  @include media-breakpoint-up($lg) {
+    position: sticky;
+    height: 4.5rem;
+  }
+  @include media-breakpoint-down($lg) {
+    position: fixed;
+    height: 3rem;
+  }
+  top: 0;
+  box-shadow: 0px 2px 6px #0000001f;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.brand-container {
+  display: flex;
+  align-items: center;
+  padding: 0 0.15rem;
+  @include media-breakpoint-up($lg) {
+    padding: 0 0.75rem;
+    width: 14rem;
+  }
+  img {
+    font-size: 2rem;
+    min-width: 3rem;
+    height: 2.1rem;
+    cursor: pointer;
+    @include media-breakpoint-down($lg) {
+      height: 2rem;
+    }
+  }
+}
+
+.search-bar-container {
+  overflow: hidden;
+  flex: 4;
+}
+
+.links-container {
+  flex: 4;
+  justify-content: end;
+  align-items: center;
+  overflow: hidden;
+  a {
+    margin-right: 2rem;
+    color: white;
+    font-size: 14px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+._btn_collapse {
+  display: flex;
+  align-items: center;
+  margin: 0 0.75rem;
+  transition: all 500ms;
+  @include media-breakpoint-up($lg) {
+    display: none;
+    height: 4.5rem;
+  }
+  @include media-breakpoint-down($lg) {
+    height: 3rem;
+  }
+  ._hamburguer {
+    cursor: pointer;
+    div {
+      background-color: white;
+      width: 32px;
+      height: 5px;
+      border-radius: 2px;
+      margin: 5px 0;
+      transition: width 500ms, margin-left 500ms;
+    }
+    &:hover {
+      div {
+        background-color: $gray-200;
+      }
+    }
+  }
+}
+
+#navbar.psMode {
+  background-color: $primary;
+  .brand {
+    background: $primary;
+  }
+}
+
+#navbar.hostMode {
+  background-color: $secondary;
+  .brand {
+    background: $secondary;
+  }
+}

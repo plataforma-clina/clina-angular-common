@@ -1,0 +1,5 @@
+export enum PlaceTypeEnum {
+  CITY = 'CITY',
+  NEIBHBORHOOD = 'NEIBHBORHOOD',
+  GOOGLE_PLACES = 'GOOGLE_PLACES',
+}
