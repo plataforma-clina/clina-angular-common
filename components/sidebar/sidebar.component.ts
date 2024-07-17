@@ -1,18 +1,18 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { NavbarItemDto } from '../../dtos/navbar-item.dto';
-import { SidebarService } from '../../sidebar.service';
-import { AuthenticationService } from '../../../authentication/authentication.service';
-import { environment } from '../../../../../environments/environment.dev';
-import { AccountDto } from '../../../account/dtos/account.dto';
-import { AccessModeEnum } from 'src/app/modules/account/enums/access-mode.enum';
-import { AccessModeService } from 'src/app/modules/account/services/access-mode.service';
+import { Component, OnDestroy, OnInit, Renderer2 } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { NavbarItemDto } from "../../dtos/navbar-item.dto";
+import { SidebarService } from "../../services/sidebar.service";
+import { AuthenticationService } from "../../../authentication/authentication.service";
+import { environment } from "../../../../../environments/environment.dev";
+import { AccountDto } from "../../../account/dtos/account.dto";
+import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
+import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
 
 @Component({
-  selector: 'clina-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  selector: "clina-sidebar",
+  templateUrl: "./sidebar.component.html",
+  styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   accessMode: AccessModeEnum = AccessModeEnum.HEALTH_PERSON;
@@ -38,108 +38,108 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public get items(): NavbarItemDto[] {
     return [
       {
-        title: 'Home',
-        img: 'images/sidebar/icon-home-solid-white.svg',
+        title: "Home",
+        img: "images/sidebar/icon-home-solid-white.svg",
         url:
-          '/' + this.accessMode === AccessModeEnum.HEALTH_PERSON
-            ? 'ps'
-            : 'host',
+          "/" + this.accessMode === AccessModeEnum.HEALTH_PERSON
+            ? "ps"
+            : "host",
         isActive: false,
         show: true,
       },
       {
-        title: 'Minha Conta',
-        img: 'images/sidebar/icon-account-solid-white.svg',
-        url: '/account',
+        title: "Minha Conta",
+        img: "images/sidebar/icon-account-solid-white.svg",
+        url: "/account",
         isActive: false,
         show: true,
       },
       {
-        title: 'Compras',
-        img: 'images/sidebar/icon-purchases-solid-white.svg',
-        url: '/purchase',
+        title: "Compras",
+        img: "images/sidebar/icon-purchases-solid-white.svg",
+        url: "/purchase",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
       },
       {
-        title: 'Reservas',
-        img: 'images/sidebar/icon-appointments-solid-white.svg',
+        title: "Reservas",
+        img: "images/sidebar/icon-appointments-solid-white.svg",
         url:
-          '/clinic/' + '/' + this.accessMode === AccessModeEnum.HEALTH_PERSON
-            ? 'ps'
-            : 'host',
+          "/clinic/" + "/" + this.accessMode === AccessModeEnum.HEALTH_PERSON
+            ? "ps"
+            : "host",
         isActive: false,
         show: true,
       },
       {
-        title: 'Consultórios',
-        img: 'images/sidebar/room-icon.svg',
-        url: '/room',
+        title: "Consultórios",
+        img: "images/sidebar/room-icon.svg",
+        url: "/room",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HOST,
       },
       {
-        title: 'Check-In/Out',
-        img: 'images/sidebar/icon-checkinout.svg',
-        url: '/check',
+        title: "Check-In/Out",
+        img: "images/sidebar/icon-checkinout.svg",
+        url: "/check",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HOST,
       },
       {
-        title: 'Ganhos',
-        img: 'images/sidebar/icon-earnings.svg',
-        url: '/earnings',
+        title: "Ganhos",
+        img: "images/sidebar/icon-earnings.svg",
+        url: "/earnings",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HOST,
       },
       {
-        title: 'SaaS',
-        img: 'images/sidebar/icon-saas.svg',
-        url: '/saas',
+        title: "SaaS",
+        img: "images/sidebar/icon-saas.svg",
+        url: "/saas",
         isActive: false,
         show:
           this.accessMode === AccessModeEnum.HOST &&
           (this.account?.isActiveSaaS || false),
       },
       {
-        title: 'Agenda',
-        img: 'images/sidebar/icon-schedule-solid-white.svg',
-        url: '/schedule',
+        title: "Agenda",
+        img: "images/sidebar/icon-schedule-solid-white.svg",
+        url: "/schedule",
         isActive: false,
         show: true,
       },
       {
-        title: 'Notificações',
-        img: 'images/sidebar/icon-bell-solid-white.svg',
-        url: '/notification',
+        title: "Notificações",
+        img: "images/sidebar/icon-bell-solid-white.svg",
+        url: "/notification",
         isActive: false,
         show: true,
       },
       {
-        title: 'Extrato Financeiro',
-        img: 'images/sidebar/icon-favorite-solid-white.svg',
-        url: '/statement',
+        title: "Extrato Financeiro",
+        img: "images/sidebar/icon-favorite-solid-white.svg",
+        url: "/statement",
         isActive: false,
         show: true,
       },
       {
-        title: 'Ganhe Créditos',
-        img: 'images/sidebar/icon-indication-earns-solid-white.svg',
-        url: '/earns',
+        title: "Ganhe Créditos",
+        img: "images/sidebar/icon-indication-earns-solid-white.svg",
+        url: "/earns",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
       },
       {
-        title: 'Anuncie seu Consultório',
-        img: 'images/sidebar/icon-megafone-solid-white.svg',
-        url: '/favorite',
+        title: "Anuncie seu Consultório",
+        img: "images/sidebar/icon-megafone-solid-white.svg",
+        url: "/favorite",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
       },
       {
-        title: 'Favoritos',
-        img: 'images/sidebar/icon-favorite-solid-white.svg',
-        url: '/favorite',
+        title: "Favoritos",
+        img: "images/sidebar/icon-favorite-solid-white.svg",
+        url: "/favorite",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
       },
@@ -157,9 +157,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
       (show: boolean) => {
         this.showNavbar = show;
         if (this.showNavbar && window.innerWidth < 992) {
-          this.renderer.addClass(document.body, 'no-scroll');
+          this.renderer.addClass(document.body, "no-scroll");
         } else {
-          this.renderer.removeClass(document.body, 'no-scroll');
+          this.renderer.removeClass(document.body, "no-scroll");
         }
       }
     );
@@ -171,16 +171,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   goToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(["/"]);
   }
 
   goToPage(item: NavbarItemDto) {
-    const sidebar = document.getElementById('sidebar');
+    const sidebar = document.getElementById("sidebar");
     this.router.navigate([item.url]);
     if (sidebar) {
-      sidebar.classList.add('pe-none');
+      sidebar.classList.add("pe-none");
       setTimeout(() => {
-        sidebar.classList.remove('pe-none');
+        sidebar.classList.remove("pe-none");
       }, 1500);
     }
     this.hideSidebar();
@@ -191,7 +191,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   hideSidebar() {
-    document.getElementById('body')?.classList.remove('overflow-hidden');
+    document.getElementById("body")?.classList.remove("overflow-hidden");
     this.sidebarService.hide();
   }
 
@@ -203,6 +203,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.showNavbarSubscription?.unsubscribe();
     this.hostSubscription?.unsubscribe();
-    this.renderer.removeClass(document.body, 'no-scroll');
+    this.renderer.removeClass(document.body, "no-scroll");
   }
 }

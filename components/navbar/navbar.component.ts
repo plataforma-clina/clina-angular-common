@@ -1,20 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SidebarService } from '../../sidebar.service';
-import { PageTitleDto } from '../../dtos/page-title.dto';
-import { Subscription } from 'rxjs';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
-import { UnleashService } from '@snowfrog/ngx-unleash-proxy-client';
-import { environment } from '../../../../../environments/environment.dev';
-import { AuthenticationService } from '../../../authentication/authentication.service';
-import { NotificationService } from '../../../notification/notification.service';
-import { AccessModeEnum } from 'src/app/modules/account/enums/access-mode.enum';
-import { AccessModeService } from 'src/app/modules/account/services/access-mode.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { SidebarService } from "../../services/sidebar.service";
+import { PageTitleDto } from "../../dtos/page-title.dto";
+import { Subscription } from "rxjs";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { UnleashService } from "@snowfrog/ngx-unleash-proxy-client";
+import { environment } from "../../../../../environments/environment.dev";
+import { AuthenticationService } from "../../../authentication/authentication.service";
+import { NotificationService } from "../../../notification/notification.service";
+import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
+import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
 
 @Component({
-  selector: 'clina-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
+  selector: "clina-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   accessMode: AccessModeEnum = AccessModeEnum.HEALTH_PERSON;
@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   faBell = faBell;
 
-  isNotificationEnabled = this.unleashService.isEnabled('ps-notification');
+  isNotificationEnabled = this.unleashService.isEnabled("ps-notification");
 
   AccessModeEnum = AccessModeEnum;
 
@@ -60,11 +60,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   goToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(["/"]);
   }
 
   showSidebar() {
-    document.getElementById('body')?.classList.add('overflow-hidden');
+    document.getElementById("body")?.classList.add("overflow-hidden");
     this.sidebarService.show();
   }
 }
