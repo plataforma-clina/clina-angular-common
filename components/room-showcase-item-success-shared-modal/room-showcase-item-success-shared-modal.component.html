@@ -1,0 +1,54 @@
+<section>
+  <div class="modal-body">
+    <div class="row w-100">
+      <div class="col d-flex justify-content-center p-0">
+        <h4 class="clina-heading text-center text-md-start">
+          Compartilhe esta sala com seus colegas
+          <span class="text-primary"> profissionais da saúde </span>
+        </h4>
+      </div>
+    </div>
+    <div class="row mt-4 w-100">
+      <div
+        class="col-md-3 col-xs-12 d-flex justify-content-center justify-content-md-start"
+      >
+        <img
+          *ngIf="room?.images"
+          [src]="s3name + 'room_photo/thumb/' + room?.images?.[0]"
+          width="110"
+          height="110"
+          style="border-radius: 10px; object-fit: 'cover'"
+          role="button"
+        />
+      </div>
+      <div class="col-md-9 col-xs-12 room-info">
+        <p class="medium-text text-center text-primary text-md-start m-0">
+          {{ room?.name }}
+        </p>
+        <p class="medium-text text-center text-md-start m-0 room-description">
+          {{ room?.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer d-flex justify-content-center">
+    <div class="row">
+      <div class="col">
+        <button
+          class="btn"
+          [class]="copied ? 'btn-success' : 'btn-primary'"
+          (click)="copyToClipBoard()"
+        >
+          <img
+            src="images/icons/icon-copy.svg"
+            class="me-2"
+            width="32"
+            height="32"
+            alt="icon-copy"
+          />
+          <span>{{ copied ? "Link copiado!" : "Copiar Link" }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

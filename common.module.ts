@@ -10,6 +10,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NavbarSearchComponent } from "./components/search/search.component";
 import { NavbarLocationDropdownComponent } from "./components/location-dropdown/location-dropdown.component";
 import { FormsModule } from "@angular/forms";
+import { RoomShowcaseItemCardComponent } from "./components/room-showcase-item-card/room-showcase-item-card.component";
+import { RoomShowcaseItemSuccessSharedModalComponent } from "./components/room-showcase-item-success-shared-modal/room-showcase-item-success-shared-modal.component";
+import { FavoriteButtonComponent } from "./components/favorite-button/favorite-button.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { FormsModule } from "@angular/forms";
     NavbarSearchComponent,
     NavbarLocationDropdownComponent,
     FooterComponent,
+    RoomShowcaseItemCardComponent,
+    RoomShowcaseItemSuccessSharedModalComponent,
+    FavoriteButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +33,12 @@ import { FormsModule } from "@angular/forms";
     RouterModule,
     FontAwesomeModule,
   ],
-  exports: [SidebarComponent, NavbarComponent, FooterComponent],
+  exports: [
+    SidebarComponent,
+    NavbarComponent,
+    FooterComponent,
+    RoomShowcaseItemCardComponent,
+    FavoriteButtonComponent,
+  ],
 })
 export class ClinaCommonModule {}

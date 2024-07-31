@@ -1,0 +1,58 @@
+<div *ngIf="hasAccountData && isAuthenticated">
+  <div
+    role="button"
+    *ngIf="!isFavorite"
+    class="btn-favorite"
+    (click)="favoriteRoom()"
+  >
+    <img
+      [src]="'images/favorite/icon-favorite.svg'"
+      *ngIf="!isFavoriting"
+      alt="logo clina care"
+      width="12"
+      height="12"
+    />
+    <span
+      *ngIf="isFavoriting"
+      class="spinner-border spinner-border-sm text-primary"
+      role="status"
+      aria-hidden="true"
+    ></span>
+  </div>
+  <div
+    role="button"
+    *ngIf="isFavorite && favoriteId !== undefined"
+    class="btn-favorite"
+    (click)="removeFavoriteRoom()"
+  >
+    <img
+      [src]="'images/favorite/icon-favorite-filled.svg'"
+      *ngIf="!isFavoriting"
+      alt="logo clina care"
+      width="12"
+      height="12"
+    />
+    <span
+      *ngIf="isFavoriting"
+      class="spinner-border spinner-border-sm text-primary"
+      role="status"
+      aria-hidden="true"
+    ></span>
+  </div>
+</div>
+<ng-template #loginModal>
+  <div class="modal-header">
+    <h4 class="text-primary">Login</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- <clina-auth-sign-in [favoriteLoginModalNavigation]="favoriteLoginModalNavigation"></clina-auth-sign-in> -->
+  </div>
+</ng-template>

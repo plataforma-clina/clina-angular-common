@@ -64,12 +64,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
       {
         title: "Reservas",
         img: "images/sidebar/icon-appointments-solid-white.svg",
-        url:
-          "/clinic/" + "/" + this.accessMode === AccessModeEnum.HEALTH_PERSON
-            ? "ps"
-            : "host",
+        url: "/appointment/host",
         isActive: false,
-        show: true,
+        show: this.accessMode === AccessModeEnum.HOST,
       },
       {
         title: "Consultórios",
@@ -86,13 +83,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         show: this.accessMode === AccessModeEnum.HOST,
       },
       {
-        title: "Ganhos",
-        img: "images/sidebar/icon-earnings.svg",
-        url: "/earnings",
-        isActive: false,
-        show: this.accessMode === AccessModeEnum.HOST,
-      },
-      {
         title: "SaaS",
         img: "images/sidebar/icon-saas.svg",
         url: "/saas",
@@ -104,7 +94,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       {
         title: "Agenda",
         img: "images/sidebar/icon-schedule-solid-white.svg",
-        url: "/schedule",
+        url: "/my-schedule",
         isActive: false,
         show: true,
       },
@@ -117,7 +107,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       },
       {
         title: "Extrato Financeiro",
-        img: "images/sidebar/icon-favorite-solid-white.svg",
+        img: "images/sidebar/icon-money-solid-white.svg",
         url: "/statement",
         isActive: false,
         show: true,
@@ -125,21 +115,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
       {
         title: "Ganhe Créditos",
         img: "images/sidebar/icon-indication-earns-solid-white.svg",
-        url: "/earns",
+        url: "/get-member",
         isActive: false,
-        show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
-      },
-      {
-        title: "Anuncie seu Consultório",
-        img: "images/sidebar/icon-megafone-solid-white.svg",
-        url: "/favorite",
-        isActive: false,
-        show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
+        show: true,
       },
       {
         title: "Favoritos",
         img: "images/sidebar/icon-favorite-solid-white.svg",
-        url: "/favorite",
+        url: "/room-favorite",
         isActive: false,
         show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
       },
