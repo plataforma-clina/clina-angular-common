@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { environment } from "../../../../../environments/environment.dev";
+import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";
 import { SidebarService } from "../../services/sidebar.service";
-import { AuthenticationService } from "../../../authentication/authentication.service";
-import { environment } from "../../../../../environments/environment.dev";
-import { AccountDto } from "../../../account/dtos/account.dto";
-import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
-import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
+//import { AccountDto } from "../../../account/dtos/account.dto";
+//import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
+//import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
 
 @Component({
   selector: "clina-sidebar",
