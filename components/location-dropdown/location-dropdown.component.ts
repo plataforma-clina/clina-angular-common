@@ -7,6 +7,7 @@ import {
   Output,
   Renderer2,
 } from '@angular/core';
+import { PlatformUtils } from 'src/app/utils/platform.util';
 
 export interface DropdownItem {
   value: string;
@@ -77,6 +78,7 @@ export class NavbarLocationDropdownComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if(PlatformUtils.isBrowser())
     this.renderer.removeClass(document.body, 'no-scroll');
   }
 }

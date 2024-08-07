@@ -8,15 +8,14 @@ import {
   ViewChild,
 } from "@angular/core";
 import { Router } from "@angular/router";
-import { environment } from "src/environments/environment";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { AuthenticationService } from "src/app/modules/authentication/authentication.service";
-import { FavoriteButtonService } from "../../services/favorite-button.service";
-import { AccountDto } from "src/app/modules/account/dtos/account.dto";
+import { RoomFavoriteDto } from "src/app/modules/common/dtos/room-favorite.dto";
 import { RoomFavoriteCreateInput } from "src/app/modules/common/inputs/room-favorite-create.input";
 import { RoomFavoriteRemoveInput } from "src/app/modules/common/inputs/room-favorite-remove.input";
-import { RoomFavoriteDto } from "src/app/modules/common/dtos/room-favorite.dto";
+import { environment } from "src/environments/environment";
 import { RoomDto } from "../../dtos/room.dto";
+import { FavoriteButtonService } from "../../services/favorite-button.service";
 
 @Component({
   selector: "clina-room-favorite-button",
@@ -46,11 +45,11 @@ export class FavoriteButtonComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authenticationService.$account.subscribe(
-      (account: AccountDto | undefined) => {
-        this.hasAccountData = account ? true : false;
-      }
-    );
+    // this.authenticationService.$account.subscribe(
+    //   (account: AccountDto | undefined) => {
+    //     this.hasAccountData = account ? true : false;
+    //   }
+    // );
     this.authenticationService.$authenticated.subscribe(
       (isAutenticated: boolean) => {
         this.isAuthenticated = isAutenticated;

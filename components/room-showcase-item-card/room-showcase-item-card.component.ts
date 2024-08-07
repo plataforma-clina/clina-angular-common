@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { environment } from "src/environments/environment";
-import { UnleashService } from "@snowfrog/ngx-unleash-proxy-client";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { HourAvailable } from "src/app/modules/common/dtos/hour-available.dto";
 import {
   PackageOfHourDto,
   RoomPackageOfHoursTypeEnum,
 } from "src/app/modules/common/dtos/package-of-hour.dto";
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { RoomFavoriteDto } from "src/app/modules/common/dtos/room-favorite.dto";
-import { RoomCardService } from "../../services/room-card.service";
-import { FavoriteButtonService } from "src/app/modules/common/services/favorite-button.service";
 import { RoomDto } from "src/app/modules/common/dtos/room.dto";
+import { FavoriteButtonService } from "src/app/modules/common/services/favorite-button.service";
+import { UnleashService } from "src/app/services/unleash.service";
+import { environment } from "src/environments/environment";
 import { SearchInput } from "../../dtos/search-input.dto";
+import { RoomCardService } from "../../services/room-card.service";
 import { RoomShowcaseItemSuccessSharedModalComponent } from "../room-showcase-item-success-shared-modal/room-showcase-item-success-shared-modal.component";
 
 @Component({
@@ -40,12 +40,12 @@ export class RoomShowcaseItemCardComponent implements OnInit {
   };
 
   imageRoomType: any = {
-    TRADITIONAL: "images/layout-images/traditional-small.svg",
-    DENTAL: "images/layout-images/odonto-small.svg",
-    PHYSICAL_EXAM: "images/layout-images/physical-small.svg",
-    DIVAN: "images/layout-images/diva-small.svg",
-    FIT: "images/layout-images/typeroom-fit-small.svg",
-    OTHERS: "images/layout-images/typeroom-others-small.svg",
+    TRADITIONAL: "common-assets/images/layout-common-assets/images/traditional-small.svg",
+    DENTAL: "common-assets/images/layout-common-assets/images/odonto-small.svg",
+    PHYSICAL_EXAM: "common-assets/images/layout-common-assets/images/physical-small.svg",
+    DIVAN: "common-assets/images/layout-common-assets/images/diva-small.svg",
+    FIT: "common-assets/images/layout-common-assets/images/typeroom-fit-small.svg",
+    OTHERS: "common-assets/images/layout-common-assets/images/typeroom-others-small.svg",
   };
 
   chosenPlan?: string;

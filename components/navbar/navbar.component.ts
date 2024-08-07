@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { SidebarService } from "../../services/sidebar.service";
-import { PageTitleDto } from "../../dtos/page-title.dto";
-import { Subscription } from "rxjs";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { UnleashService } from "@snowfrog/ngx-unleash-proxy-client";
+import { Subscription } from "rxjs";
+import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
+import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
+import { UnleashService } from "src/app/services/unleash.service";
 import { environment } from "../../../../../environments/environment.dev";
 import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NotificationService } from "../../../notification/notification.service";
-import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
-import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
+import { PageTitleDto } from "../../dtos/page-title.dto";
+import { SidebarService } from "../../services/sidebar.service";
 
 @Component({
   selector: "clina-navbar",
