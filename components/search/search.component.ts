@@ -218,6 +218,8 @@ export class NavbarSearchComponent implements OnInit {
         localStorage.setItem('filterDate', new Date().toISOString());
         localStorage.setItem('savedFilters', JSON.stringify(filters));
       };
+      debugger
+
 
       // Função para obter os filtros salvos no localStorage
       const getSavedFilters = (): SearchInput | null => {
@@ -230,7 +232,7 @@ export class NavbarSearchComponent implements OnInit {
           const savedFilters = getSavedFilters();
           const hasLocalization =
             paramsList?.['lat'] && paramsList?.['lng'] && paramsList?.['radius'];
-
+          debugger
           if (paramsList && Object.keys(paramsList).length > 0) {
             // Filtros da URL
             this.searchInput = {
@@ -365,8 +367,10 @@ export class NavbarSearchComponent implements OnInit {
       !this.locationSelected &&
       this.keyword.length > 2
     ) {
+      debugger
       await this.selectLocation(this.locationsList[0]);
     }
+    debugger
 
     const searchInput = Object.assign(this.searchInput as SearchInput, {
       begin: this.date

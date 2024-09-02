@@ -40,12 +40,12 @@ export class RoomShowcaseItemCardComponent implements OnInit {
   };
 
   imageRoomType: any = {
-    TRADITIONAL: "/common-assets/images/layout-/common-assets/images/traditional-small.svg",
-    DENTAL: "/common-assets/images/layout-/common-assets/images/odonto-small.svg",
-    PHYSICAL_EXAM: "/common-assets/images/layout-/common-assets/images/physical-small.svg",
-    DIVAN: "/common-assets/images/layout-/common-assets/images/diva-small.svg",
-    FIT: "/common-assets/images/layout-/common-assets/images/typeroom-fit-small.svg",
-    OTHERS: "/common-assets/images/layout-/common-assets/images/typeroom-others-small.svg",
+    TRADITIONAL: "/common-assets/images/layout-images/traditional-small.svg",
+    DENTAL: "/common-assets/images/layout-images/odonto-small.svg",
+    PHYSICAL_EXAM: "/common-assets/images/layout-images/physical-small.svg",
+    DIVAN: "/common-assets/images/layout-images/diva-small.svg",
+    FIT: "/common-assets/images/layout-images/typeroom-fit-small.svg",
+    OTHERS: "/common-assets/images/layout-images/typeroom-others-small.svg",
   };
 
   chosenPlan?: string;
