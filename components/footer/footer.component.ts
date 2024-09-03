@@ -13,7 +13,7 @@ export class FooterComponent implements OnInit {
 
   homeUrl = environment.baseUrl;
   psUrl = environment.psUrl;
-  hostUrl = 'environment.hostUrl';
+  hostUrl = environment.hostUrl;
   whatsappNumber = environment.whatsappNumber;
 
   AccessModeEnum = AccessModeEnum;

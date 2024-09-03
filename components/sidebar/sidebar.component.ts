@@ -4,7 +4,7 @@ import { Subscription } from "rxjs";
 import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
 import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
 import { PlatformUtils } from "src/app/utils/platform.util";
-import { environment } from "../../../../../environments/environment.dev";
+import { environment } from "../../../../../environments/environment";
 import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";
 import { SidebarService } from "../../services/sidebar.service";

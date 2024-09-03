@@ -5,7 +5,7 @@ import { Subscription } from "rxjs";
 import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
 import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
 import { UnleashService } from "src/app/services/unleash.service";
-import { environment } from "../../../../../environments/environment.dev";
+import { environment } from "../../../../../environments/environment";
 import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NotificationService } from "../../../notification/notification.service";
 import { PageTitleDto } from "../../dtos/page-title.dto";
