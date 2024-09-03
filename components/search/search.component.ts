@@ -46,6 +46,7 @@ export class NavbarSearchComponent implements OnInit {
     return this.locationsList.map((l) => ({
       label: l.label,
       value: l.label,
+      neighborhood: l.label,
     }));
   }
 
@@ -152,16 +153,15 @@ export class NavbarSearchComponent implements OnInit {
   }
 
   async selectLocation(event: any) {
-    debugger
     if (!event) {
       this.locationSelected = undefined;
       this.changeLocationKeyword('');
       this.openLocalization();
       return;
-    }
-
+    }    
+    
     this.locationSelected = event;
-
+  
     await this.getCoordinates();
   }
 
@@ -218,7 +218,6 @@ export class NavbarSearchComponent implements OnInit {
         localStorage.setItem('filterDate', new Date().toISOString());
         localStorage.setItem('savedFilters', JSON.stringify(filters));
       };
-      debugger
 
 
       // Função para obter os filtros salvos no localStorage
@@ -232,7 +231,6 @@ export class NavbarSearchComponent implements OnInit {
           const savedFilters = getSavedFilters();
           const hasLocalization =
             paramsList?.['lat'] && paramsList?.['lng'] && paramsList?.['radius'];
-          debugger
           if (paramsList && Object.keys(paramsList).length > 0) {
             // Filtros da URL
             this.searchInput = {
@@ -367,10 +365,8 @@ export class NavbarSearchComponent implements OnInit {
       !this.locationSelected &&
       this.keyword.length > 2
     ) {
-      debugger
       await this.selectLocation(this.locationsList[0]);
     }
-    debugger
 
     const searchInput = Object.assign(this.searchInput as SearchInput, {
       begin: this.date
@@ -408,6 +404,7 @@ export class NavbarSearchComponent implements OnInit {
       take: 12,
     });
 
+    debugger
     this.router.navigate(['/room/list'], { queryParams: searchInput });
 
     setTimeout(() => this.close(), 200);

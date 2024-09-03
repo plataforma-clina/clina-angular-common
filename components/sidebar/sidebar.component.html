@@ -4,8 +4,7 @@
     show: showNavbar,
     hostMode: accessMode === AccessModeEnum.HOST,
     psMode: accessMode === AccessModeEnum.HEALTH_PERSON
-  }"
->
+  }">
   <div class="_sidebar_brand">
     <div>
       <img src="/common-assets/images/branding/logo-white.svg" (click)="goToHome()" />
@@ -15,13 +14,11 @@
   <div class="items-container">
     <li
       [style]="item.show ? 'display: block' : 'display: none'"
-      *ngFor="let item of items; let i = index"
-    >
+      *ngFor="let item of items; let i = index">
       <div
         class="d-flex justify-content-between w-100 p-3"
         [class._active]="item.isActive"
-        (click)="goToPage(item)"
-      >
+        (click)="goToPage(item)">
         <div class="d-flex align-items-center">
           <img [src]="item.img" />
           <a class="ms-3 item-label">{{ item.title }}</a>
@@ -29,40 +26,32 @@
       </div>
     </li>
 
-    @if (accessMode === AccessModeEnum.HEALTH_PERSON) {
-    <li class="access-mode-container">
+    <li class="access-mode-container" *ngIf="isAuthenticated && accessMode === AccessModeEnum.HEALTH_PERSON">
       <div
         class="d-flex access-mode-button align-items-center p-1"
-        (click)="toggleAccessMode(AccessModeEnum.HOST)"
-      >
+        (click)="toggleAccessMode(AccessModeEnum.HOST)">
         <div class="_images_icon">
           <img src="/common-assets/images/sidebar/icon-toggle-mode-white.svg" />
         </div>
-        <span class="item-label d-flex justify-content-center"
-          >Modo anfitrião</span
-        >
+        <span class="item-label d-flex justify-content-center">Modo anfitrião</span>
       </div>
     </li>
-    } @else {
-    <li class="access-mode-container">
+
+    <li class="access-mode-container" *ngIf="isAuthenticated && accessMode !== AccessModeEnum.HEALTH_PERSON">
       <div
         class="d-flex access-mode-button align-items-center p-1"
-        (click)="toggleAccessMode(AccessModeEnum.HEALTH_PERSON)"
-      >
+        (click)="toggleAccessMode(AccessModeEnum.HEALTH_PERSON)">
         <div class="_images_icon">
           <img src="/common-assets/images/sidebar/icon-toggle-mode-white.svg" />
         </div>
         <span
           class="item-label d-flex justify-content-center"
-          style="line-height: 15px"
-          >Modo profiss.<br />
-          da saúde</span
-        >
+          style="line-height: 15px">Modo profiss.<br />
+          da saúde</span>
       </div>
     </li>
-    }
 
-    <li class="logout-container">
+    <li class="logout-container" *ngIf="isAuthenticated">
       <div class="d-flex logout-button p-1" (click)="logout()">
         <div class="_images_icon">
           <img src="/common-assets/images/sidebar/icon-logout-white.svg" />
@@ -73,8 +62,3 @@
   </div>
 </ul>
 
-<div
-  id="sidebar-backdrop"
-  [ngClass]="{ show: showNavbar }"
-  (click)="hideSidebar()"
-></div>

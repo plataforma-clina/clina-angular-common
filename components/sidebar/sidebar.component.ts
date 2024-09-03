@@ -1,14 +1,13 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
+import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
+import { PlatformUtils } from "src/app/utils/platform.util";
 import { environment } from "../../../../../environments/environment.dev";
 import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";
 import { SidebarService } from "../../services/sidebar.service";
-//import { AccountDto } from "../../../account/dtos/account.dto";
-import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
-import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
-import { PlatformUtils } from "src/app/utils/platform.util";
 
 @Component({
   selector: "clina-sidebar",
@@ -16,11 +15,10 @@ import { PlatformUtils } from "src/app/utils/platform.util";
   styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
+  @Input() isAuthenticated: boolean = false;
   accessMode: AccessModeEnum = AccessModeEnum.HEALTH_PERSON;
 
-  //account?: AccountDto;
   hostSubscription?: Subscription;
-
   showNavbar: boolean = false;
   showNavbarSubscription?: Subscription;
 
@@ -41,8 +39,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       {
         title: "Home",
         img: "/common-assets/images/sidebar/icon-home-solid-white.svg",
-        url:
-          "/ps",
+        url: "/ps",
         isActive: false,
         show: true,
       },
@@ -86,8 +83,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         img: "/common-assets/images/sidebar/icon-saas.svg",
         url: "/saas",
         isActive: false,
-        show:
-          this.accessMode === AccessModeEnum.HOST
+        show: this.accessMode === AccessModeEnum.HOST,
       },
       {
         title: "Agenda",
@@ -134,22 +130,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     );
 
-    if(PlatformUtils.isBrowser())
-    this.showNavbarSubscription = this.sidebarService.$show.subscribe(
-      (show: boolean) => {
-        this.showNavbar = show;
-        if (this.showNavbar && window.innerWidth < 992) {
-          this.renderer.addClass(document.body, "no-scroll");
-        } else {
-          this.renderer.removeClass(document.body, "no-scroll");
+    if (PlatformUtils.isBrowser())
+      this.showNavbarSubscription = this.sidebarService.$show.subscribe(
+        (show: boolean) => {
+          this.showNavbar = show;
+          if (this.showNavbar && window.innerWidth < 992) {
+            this.renderer.addClass(document.body, "no-scroll");
+          } else {
+            this.renderer.removeClass(document.body, "no-scroll");
+          }
         }
-      }
-    );
-    // this.authenticationService.$account.subscribe(
-    //   (account: AccountDto | undefined) => {
-    //     this.account = account;
-    //   }
-    // );
+      );
   }
 
   goToHome() {
@@ -157,15 +148,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   goToPage(item: NavbarItemDto) {
-    debugger
     const sidebar = document.getElementById("sidebar");
     this.router.navigate([item.url]);
-    if (sidebar) {
-      sidebar.classList.add("pe-none");
-      setTimeout(() => {
-        sidebar.classList.remove("pe-none");
-      }, 1500);
-    }
+
     this.hideSidebar();
   }
 
@@ -186,7 +171,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.showNavbarSubscription?.unsubscribe();
     this.hostSubscription?.unsubscribe();
-    if(PlatformUtils.isBrowser())
-    this.renderer.removeClass(document.body, "no-scroll");
+    if (PlatformUtils.isBrowser())
+      this.renderer.removeClass(document.body, "no-scroll");
   }
 }
