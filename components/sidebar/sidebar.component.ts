@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { Router } from "@angular/router";
+import { AccessModeEnum } from "app/modules/account/enums/access-mode.enum";
+import { AccessModeService } from "app/modules/account/services/access-mode.service";
+import { PlatformUtils } from "app/utils/platform.util";
 import { Subscription } from "rxjs";
-import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
-import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
-import { PlatformUtils } from "src/app/utils/platform.util";
 import { environment } from "../../../../../environments/environment";
 import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";

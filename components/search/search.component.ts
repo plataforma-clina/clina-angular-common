@@ -1,13 +1,13 @@
 import {
-  Component,
-  HostListener,
-  Input,
-  OnInit,
-  Renderer2,
+    Component,
+    HostListener,
+    Input,
+    OnInit,
+    Renderer2,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PlatformUtils } from 'app/utils/platform.util';
 import moment from 'moment-timezone';
-import { PlatformUtils } from 'src/app/utils/platform.util';
 import { CoordinatesDto } from '../../dtos/coordinates.dto';
 import { PlaceDto } from '../../dtos/place.dto';
 import { SearchInput } from '../../dtos/search-input.dto';

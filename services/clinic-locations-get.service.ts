@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { environment } from 'environments/environment';
 import { Observable, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { ClinicLocationDto } from '../dtos/clinic-locations.dto';
 import { CLINIC_LOCATIONS_QUERY } from '../queries/clinic-locations.query';
 

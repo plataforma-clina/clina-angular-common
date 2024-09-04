@@ -1,19 +1,19 @@
 import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  TemplateRef,
-  ViewChild,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    TemplateRef,
+    ViewChild,
 } from "@angular/core";
 import { Router } from "@angular/router";
+import { AuthenticationService } from "app/modules/authentication/authentication.service";
+import { RoomFavoriteDto } from "app/modules/common/dtos/room-favorite.dto";
+import { RoomFavoriteCreateInput } from "app/modules/common/inputs/room-favorite-create.input";
+import { RoomFavoriteRemoveInput } from "app/modules/common/inputs/room-favorite-remove.input";
+import { environment } from "environments/environment";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
-import { AuthenticationService } from "src/app/modules/authentication/authentication.service";
-import { RoomFavoriteDto } from "src/app/modules/common/dtos/room-favorite.dto";
-import { RoomFavoriteCreateInput } from "src/app/modules/common/inputs/room-favorite-create.input";
-import { RoomFavoriteRemoveInput } from "src/app/modules/common/inputs/room-favorite-remove.input";
-import { environment } from "src/environments/environment";
 import { RoomDto } from "../../dtos/room.dto";
 import { FavoriteButtonService } from "../../services/favorite-button.service";
 

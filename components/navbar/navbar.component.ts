@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { AccessModeEnum } from "app/modules/account/enums/access-mode.enum";
+import { AccessModeService } from "app/modules/account/services/access-mode.service";
+import { UnleashService } from "app/services/unleash.service";
 import { Subscription } from "rxjs";
-import { AccessModeEnum } from "src/app/modules/account/enums/access-mode.enum";
-import { AccessModeService } from "src/app/modules/account/services/access-mode.service";
-import { UnleashService } from "src/app/services/unleash.service";
 import { environment } from "../../../../../environments/environment";
 import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NotificationService } from "../../../notification/notification.service";

@@ -1,13 +1,13 @@
 import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  Renderer2,
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+    Renderer2,
 } from '@angular/core';
-import { PlatformUtils } from 'src/app/utils/platform.util';
+import { PlatformUtils } from 'app/utils/platform.util';
 
 export interface DropdownItem {
   value: string;

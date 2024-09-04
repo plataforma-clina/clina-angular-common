@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
-import { HourAvailable } from "src/app/modules/common/dtos/hour-available.dto";
+import { HourAvailable } from "app/modules/common/dtos/hour-available.dto";
 import {
-  PackageOfHourDto,
-  RoomPackageOfHoursTypeEnum,
-} from "src/app/modules/common/dtos/package-of-hour.dto";
-import { RoomFavoriteDto } from "src/app/modules/common/dtos/room-favorite.dto";
-import { RoomDto } from "src/app/modules/common/dtos/room.dto";
-import { FavoriteButtonService } from "src/app/modules/common/services/favorite-button.service";
-import { UnleashService } from "src/app/services/unleash.service";
-import { environment } from "src/environments/environment";
+    PackageOfHourDto,
+    RoomPackageOfHoursTypeEnum,
+} from "app/modules/common/dtos/package-of-hour.dto";
+import { RoomFavoriteDto } from "app/modules/common/dtos/room-favorite.dto";
+import { RoomDto } from "app/modules/common/dtos/room.dto";
+import { FavoriteButtonService } from "app/modules/common/services/favorite-button.service";
+import { UnleashService } from "app/services/unleash.service";
+import { environment } from "environments/environment";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { SearchInput } from "../../dtos/search-input.dto";
 import { RoomCardService } from "../../services/room-card.service";
 import { RoomShowcaseItemSuccessSharedModalComponent } from "../room-showcase-item-success-shared-modal/room-showcase-item-success-shared-modal.component";
