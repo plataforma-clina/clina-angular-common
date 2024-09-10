@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly renderer: Renderer2,
     private readonly accessModeService: AccessModeService
-  ) {}
+  ) { }
 
   public get items(): NavbarItemDto[] {
     return [
@@ -148,11 +148,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   goToPage(item: NavbarItemDto) {
+    alert('test')
     debugger;
-    this.router.navigate([item.url], {replaceUrl: true});
+    this.router.navigate([item.url], { replaceUrl: true });
     const sidebar = document.getElementById("sidebar");
 
-   this.hideSidebar();
+    this.hideSidebar();
   }
 
   logout() {
@@ -165,10 +166,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   toggleAccessMode(mode: AccessModeEnum) {
-    if(mode==AccessModeEnum.HOST && PlatformUtils.isBrowser())
+    if (mode == AccessModeEnum.HOST && PlatformUtils.isBrowser())
       window.location.href = environment.hostUrl;
     else
-    this.accessModeService.setMode(mode);
+      this.accessModeService.setMode(mode);
   }
 
   ngOnDestroy(): void {
