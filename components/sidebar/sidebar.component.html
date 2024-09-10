@@ -14,12 +14,12 @@
   <div class="items-container">
     <li
       [style]="item.show ? 'display: block' : 'display: none'"
-      *ngFor="let item of items; let i = index">
+      *ngFor="let item of items; let i = index"  (click)="goToPage(item)" [class._active]="item.isActive">
       <div
         class="d-flex justify-content-between w-100 p-3"
         style="margin-left: -.2em;"
-        [class._active]="item.isActive"
-        (click)="goToPage(item)">
+       
+       >
         <div class="d-flex align-items-center">
           <img [src]="item.img" />
           <a class="ms-3 item-label">{{ item.title }}</a>
