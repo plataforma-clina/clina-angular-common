@@ -1,7 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { environment } from "@environments/environment";
 import { AccessModeEnum } from "app/modules/account/enums/access-mode.enum";
 import { AccessModeService } from "app/modules/account/services/access-mode.service";
+import { PlatformUtils } from "app/utils/platform.util";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";
@@ -141,6 +143,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   toggleAccessMode(mode: AccessModeEnum) {
+    if (mode == AccessModeEnum.HOST && PlatformUtils.isBrowser())
+      window.location.href = environment.hostUrl;
+    else
+      this.accessModeService.setMode(mode);
     this.accessModeService.setMode(mode);
   }
 
