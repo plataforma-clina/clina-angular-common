@@ -164,9 +164,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   toggleAccessMode(mode: AccessModeEnum) {
-    if(mode==AccessModeEnum.HOST)
-      this.router.navigateByUrl(environment.hostUrl)
-    this.showNavbar = false;
+    if(mode==AccessModeEnum.HOST && PlatformUtils.isBrowser())
+      window.location.href = environment.hostUrl;
+    else
     this.accessModeService.setMode(mode);
   }
 

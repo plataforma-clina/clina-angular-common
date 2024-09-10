@@ -7,7 +7,7 @@
   @include media-breakpoint-up($lg) {
     position: fixed;
     width: 100vw;
-    z-index: 3;
+    z-index: 100;
   }
 }
 

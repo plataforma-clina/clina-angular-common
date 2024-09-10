@@ -17,6 +17,7 @@
       *ngFor="let item of items; let i = index">
       <div
         class="d-flex justify-content-between w-100 p-3"
+        style="margin-left: -.2em;"
         [class._active]="item.isActive"
         (click)="goToPage(item)">
         <div class="d-flex align-items-center">
