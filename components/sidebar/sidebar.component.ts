@@ -1,11 +1,9 @@
-import { Component, Input, OnDestroy, OnInit, Renderer2 } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AccessModeEnum } from "app/modules/account/enums/access-mode.enum";
 import { AccessModeService } from "app/modules/account/services/access-mode.service";
-import { PlatformUtils } from "app/utils/platform.util";
-import { Subscription } from "rxjs";
-import { environment } from "../../../../../environments/environment";
-import { AuthenticationService } from "../../../authentication/authentication.service";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { map } from "rxjs/operators";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";
 import { SidebarService } from "../../services/sidebar.service";
 
@@ -16,25 +14,36 @@ import { SidebarService } from "../../services/sidebar.service";
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   @Input() isAuthenticated: boolean = false;
-  accessMode: AccessModeEnum = AccessModeEnum.HEALTH_PERSON;
+  public AccessModeEnum = AccessModeEnum;  // Exponha o enum para o template
+  private accessModeSubject = new BehaviorSubject<AccessModeEnum>(AccessModeEnum.HEALTH_PERSON);
+  accessMode$ = this.accessModeSubject.asObservable();
 
-  hostSubscription?: Subscription;
-  showNavbar: boolean = false;
-  showNavbarSubscription?: Subscription;
+  showNavbar$!: Observable<boolean>;
+  items$: Observable<NavbarItemDto[]>;
 
-  psUrl = environment.psUrl;
-
-  AccessModeEnum = AccessModeEnum;
+  private showNavbarSubscription?: Subscription;
 
   constructor(
-    private readonly authenticationService: AuthenticationService,
     private readonly sidebarService: SidebarService,
     private readonly router: Router,
-    private readonly renderer: Renderer2,
     private readonly accessModeService: AccessModeService
-  ) { }
+  ) {
+    this.items$ = this.accessMode$.pipe(
+      map(accessMode => this.getItems(accessMode))
+    );
+  }
 
-  public get items(): NavbarItemDto[] {
+  ngOnInit(): void {
+    this.showNavbar$ = this.sidebarService.$show; // Use o observable diretamente
+
+    this.accessModeService.$accessMode.subscribe(
+      (accessMode: AccessModeEnum) => {
+        this.accessModeSubject.next(accessMode);
+      }
+    );
+  }
+
+  getItems(accessMode: AccessModeEnum): NavbarItemDto[] {
     return [
       {
         title: "Home",
@@ -55,35 +64,35 @@ export class SidebarComponent implements OnInit, OnDestroy {
         img: "/common-assets/images/sidebar/icon-purchases-solid-white.svg",
         url: "/purchase",
         isActive: false,
-        show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
+        show: accessMode === AccessModeEnum.HEALTH_PERSON,
       },
       {
         title: "Reservas",
         img: "/common-assets/images/sidebar/icon-appointments-solid-white.svg",
         url: "/appointment/host",
         isActive: false,
-        show: this.accessMode === AccessModeEnum.HOST,
+        show: accessMode === AccessModeEnum.HOST,
       },
       {
         title: "Consultórios",
         img: "/common-assets/images/sidebar/room-icon.svg",
         url: "/room",
         isActive: false,
-        show: this.accessMode === AccessModeEnum.HOST,
+        show: accessMode === AccessModeEnum.HOST,
       },
       {
         title: "Check-In/Out",
         img: "/common-assets/images/sidebar/icon-checkinout.svg",
         url: "/check",
         isActive: false,
-        show: this.accessMode === AccessModeEnum.HOST,
+        show: accessMode === AccessModeEnum.HOST,
       },
       {
         title: "SaaS",
         img: "/common-assets/images/sidebar/icon-saas.svg",
         url: "/saas",
         isActive: false,
-        show: this.accessMode === AccessModeEnum.HOST,
+        show: accessMode === AccessModeEnum.HOST,
       },
       {
         title: "Agenda",
@@ -118,64 +127,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
         img: "/common-assets/images/sidebar/icon-favorite-solid-white.svg",
         url: "/room-favorite",
         isActive: false,
-        show: this.accessMode === AccessModeEnum.HEALTH_PERSON,
+        show: accessMode === AccessModeEnum.HEALTH_PERSON,
       },
     ];
-  }
-
-  ngOnInit(): void {
-    this.accessModeService.$accessMode.subscribe(
-      (accessMode: AccessModeEnum) => {
-        this.accessMode = accessMode;
-      }
-    );
-
-    if (PlatformUtils.isBrowser())
-      this.showNavbarSubscription = this.sidebarService.$show.subscribe(
-        (show: boolean) => {
-          this.showNavbar = show;
-          if (this.showNavbar && window.innerWidth < 992) {
-            this.renderer.addClass(document.body, "no-scroll");
-          } else {
-            this.renderer.removeClass(document.body, "no-scroll");
-          }
-        }
-      );
   }
 
   goToHome() {
     this.router.navigate(["/"]);
   }
 
-  goToPage(item: NavbarItemDto) {
-    alert('test')
-    debugger;
-    this.router.navigate([item.url], { replaceUrl: true });
-    const sidebar = document.getElementById("sidebar");
-
-    this.hideSidebar();
-  }
-
-  logout() {
-    this.authenticationService.signOut();
-  }
-
   hideSidebar() {
-    document.getElementById("body")?.classList.remove("overflow-hidden");
     this.sidebarService.hide();
   }
 
   toggleAccessMode(mode: AccessModeEnum) {
-    if (mode == AccessModeEnum.HOST && PlatformUtils.isBrowser())
-      window.location.href = environment.hostUrl;
-    else
-      this.accessModeService.setMode(mode);
+    this.accessModeService.setMode(mode);
   }
 
   ngOnDestroy(): void {
     this.showNavbarSubscription?.unsubscribe();
-    this.hostSubscription?.unsubscribe();
-    if (PlatformUtils.isBrowser())
-      this.renderer.removeClass(document.body, "no-scroll");
   }
 }

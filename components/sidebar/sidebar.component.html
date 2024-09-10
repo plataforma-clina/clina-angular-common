@@ -1,10 +1,11 @@
 <ul
   id="sidebar"
   [ngClass]="{
-    show: showNavbar,
-    hostMode: accessMode === AccessModeEnum.HOST,
-    psMode: accessMode === AccessModeEnum.HEALTH_PERSON
-  }">
+    show: (showNavbar$ | async),
+    hostMode: (accessMode$ | async) === AccessModeEnum.HOST,
+    psMode: (accessMode$ | async) === AccessModeEnum.HEALTH_PERSON
+  }"
+  >
   <div class="_sidebar_brand">
     <div>
       <img src="/common-assets/images/branding/logo-white.svg" (click)="goToHome()" />
@@ -13,22 +14,19 @@
   </div>
   <div class="items-container">
     <li
+      *ngFor="let item of (items$ | async)"
       [style]="item.show ? 'display: block' : 'display: none'"
-      *ngFor="let item of items; let i = index"  [class._active]="item.isActive">
-      <a
-        class="d-flex justify-content-between w-100 p-3"
-        href="{{item.url}}" 
-        style="margin-left: -.2em;"
-       
-       >
+      [class._active]="item.isActive"
+    >
+      <a class="d-flex justify-content-between w-100 p-3" [routerLink]="[item.url]">
         <div class="d-flex align-items-center">
           <img [src]="item.img" />
-          <a class="ms-3 item-label">{{ item.title }}</a>
+          <span class="ms-3 item-label">{{ item.title }}</span>
         </div>
       </a>
     </li>
 
-    <li class="access-mode-container" *ngIf="isAuthenticated && accessMode === AccessModeEnum.HEALTH_PERSON">
+    <li class="access-mode-container" *ngIf="isAuthenticated && (accessMode$ | async) == AccessModeEnum.HEALTH_PERSON">
       <div
         class="d-flex access-mode-button align-items-center p-1"
         (click)="toggleAccessMode(AccessModeEnum.HOST)">
@@ -39,7 +37,7 @@
       </div>
     </li>
 
-    <li class="access-mode-container" *ngIf="isAuthenticated && accessMode !== AccessModeEnum.HEALTH_PERSON">
+    <li class="access-mode-container" *ngIf="isAuthenticated && (accessMode$ | async) != AccessModeEnum.HEALTH_PERSON">
       <div
         class="d-flex access-mode-button align-items-center p-1"
         (click)="toggleAccessMode(AccessModeEnum.HEALTH_PERSON)">
