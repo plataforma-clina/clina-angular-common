@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   items$: Observable<NavbarItemDto[]>;
 
   private showNavbarSubscription?: Subscription;
+  isSidebarHovered = false; // Controla se o sidebar está com hover
 
   constructor(
     private readonly sidebarService: SidebarService,
@@ -145,9 +146,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
   toggleAccessMode(mode: AccessModeEnum) {
     if (mode == AccessModeEnum.HOST && PlatformUtils.isBrowser())
       window.location.href = environment.hostUrl;
+
     else
       this.accessModeService.setMode(mode);
-    this.accessModeService.setMode(mode);
+   // this.accessModeService.setMode(mode);
+  }
+  onMouseEnter() {
+    this.isSidebarHovered = true;
+  }
+
+  onMouseLeave() {
+    this.isSidebarHovered = false;
   }
 
   ngOnDestroy(): void {

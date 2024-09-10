@@ -6,14 +6,15 @@
   position: fixed;
   z-index: 3;
   transition: all 0.5s;
-  @include media-breakpoint-up($lg) {
+
+  @include media-breakpoint-up($md) {
     position: fixed;
     width: 15rem;
   }
 }
 
 #sidebar-backdrop {
-  @include media-breakpoint-down($lg) {
+  @include media-breakpoint-down($md) {
     position: fixed;
     width: 100vw;
     height: 101vh;
@@ -21,6 +22,7 @@
     opacity: 0.4;
     z-index: 4;
     display: none;
+
     &.show {
       display: block;
     }
@@ -30,85 +32,100 @@
 #sidebar {
   border: 1px solid #ddd;
   border-top: none;
-  .items-container{
-    padding-top: 4em!important;
+
+  .items-container {
+    padding-top: 4em !important;
   }
+
   .item-label {
     transition: 0s;
     opacity: 0;
   }
+
   overflow: hidden;
-  @include media-breakpoint-down($lg) {
+
+  // Para telas menores que o breakpoint 'lg'
+  @include media-breakpoint-down($md) {
+    z-index: 5;
+    width: 0; // Sidebar escondido inicialmente
+    position: fixed;
+    overflow: hidden;
+    height: 100vh; // Sidebar ocupa toda a altura da tela
+    transition: all 0.3s ease-in-out; // Transição suave
+
+    // Quando a sidebar estiver visível
     &.show {
+      width: 20rem; // Largura da sidebar expandida
+      max-width: 80vw; // Limite da largura em telas menores
+      overflow-y: auto; // Adiciona rolagem vertical se necessário
       .item-label {
         transition: 0.1s;
         opacity: 1;
       }
     }
   }
-  @include media-breakpoint-up($lg) {
+
+  // Para telas maiores que o breakpoint 'lg'
+  @include media-breakpoint-up($md) {
     z-index: 5;
-    width: 3.6rem;
+    width: 3.6rem; // Largura padrão do sidebar colapsado
     position: fixed;
-    &:hover {
-      width: 14rem;
+    height: 100vh; // Sidebar ocupa toda a altura da tela
+    transition: all 0.3s ease-in-out;
+
+    &:hover, &.show { // Aumenta a largura no hover ou na classe 'show'
+      width: 14rem; // Largura expandida no hover ou com 'show'
       .item-label {
         transition: 0.3s ease-in;
         opacity: 1;
       }
     }
-    &.psMode {
-      @media (max-height: 719px) {
-        width: calc(3.6rem + 10px);
-      }
+
+    // Quando a classe 'show' é removida, o sidebar volta para a largura original
+    &:not(.show) {
+      width: 3.6rem; // Volta para a largura colapsada
     }
-    &.hostMode {
-      @media (max-height: 841px) {
-        width: calc(3.6rem + 10px);
-      }
-    }
+
   }
-  @include media-breakpoint-down($lg) {
-    z-index: 5;
-    width: 0px;
-    position: fixed;
-    overflow: hidden;
-    &.show {
-      width: 20rem;
-      max-width: 80vw;
-    }
-  }
+
+  // Estilos gerais
   list-style: none;
   padding: 0;
   color: $primary-dark;
   height: 100vh;
-  transition: all 0.5s;
+  transition: all 0.5s ease-in-out;
   left: 0;
-  div.items-container {
+
+  .items-container {
     padding-bottom: 1.5rem;
     overflow-x: hidden;
     overflow-y: auto;
-    position: sticky;
-    max-height: calc(100vh - 4.5rem);
+    max-height: calc(100vh - 4.5rem); // Ajusta a altura disponível para a lista de itens
+
     &::-webkit-scrollbar {
       width: 10px;
     }
+
     &::-webkit-scrollbar-track {
       border-radius: 5px;
     }
+
     &::-webkit-scrollbar-thumb {
       border-radius: 5px;
     }
+
     li {
       white-space: nowrap;
       align-items: center;
       cursor: pointer;
-      transition: all 0.5s;
+      transition: all 0.5s ease-in-out;
       overflow-x: hidden;
+
       img {
         width: 20px;
         height: 20px;
       }
+
       a {
         font: normal normal normal 14px/28px Poppins;
         display: flex;
@@ -116,6 +133,7 @@
       }
     }
   }
+
   a {
     overflow: hidden;
     display: flex;
@@ -132,9 +150,11 @@
   box-shadow: 0px 2px 6px #0000001f;
   z-index: 3;
   transition: all 0.5s;
-  @include media-breakpoint-down($lg) {
+
+  @include media-breakpoint-down($md) {
     height: 3rem;
   }
+
   div {
     width: 14rem;
     height: 4.5rem;
@@ -142,28 +162,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @include media-breakpoint-down($lg) {
+
+    @include media-breakpoint-down($md) {
       width: 20rem;
       max-width: 80vw;
       height: 3rem;
     }
   }
+
   img {
     font-size: 2rem;
     min-width: 3rem;
     height: 2.1rem;
     cursor: pointer;
-    @include media-breakpoint-down($lg) {
+
+    @include media-breakpoint-down($md) {
       height: 2rem;
     }
   }
+
   .close-sidebar {
     font-size: 2.6rem;
     cursor: pointer;
+
     &:hover {
       color: $gray-300;
     }
-    @include media-breakpoint-up($lg) {
+
+    @include media-breakpoint-up($md) {
       display: none;
     }
   }
@@ -173,13 +199,16 @@
   margin-top: 3rem;
   padding: 0 0.5rem;
   border: none !important;
+
   .access-mode-button {
     color: white;
     position: relative;
     border-radius: 50px;
+
     ._images_icon {
       margin-left: 4px;
     }
+
     span {
       position: absolute;
       width: 100%;
@@ -194,14 +223,17 @@
   margin-top: 0.5rem;
   padding: 0 0.5rem;
   border: none !important;
+
   .logout-button {
     position: relative;
     text-align: center;
     border-radius: 50px;
     border: solid 2px white !important;
+
     ._images_icon {
       margin-left: 6px;
     }
+
     span {
       position: absolute;
       width: 100%;
@@ -214,35 +246,44 @@
 
 #sidebar.psMode {
   background-color: white;
+
   li:not(.access-mode-container):not(.logout-container) {
     border-left: 5px solid white;
+
     &:hover,
     &._active {
       border-left: 5px solid $primary !important;
       background-color: white;
     }
   }
+
   ._sidebar_brand {
     background: $primary;
   }
+
   .access-mode-button {
     border: solid 2px $secondary;
     background-color: $secondary;
+
     &:hover {
       background-color: $secondary-dark;
       border-color: $secondary-dark;
     }
   }
+
   .logout-button:hover {
     background: $primary-dark;
   }
+
   ::-webkit-scrollbar-track {
     background: $primary-light;
     box-shadow: inset 1px 1px 3px hsla(260, 100%, 60%, 0.8);
   }
+
   ::-webkit-scrollbar-thumb {
     background: $primary-dark;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: $primary-medium;
   }
@@ -250,36 +291,45 @@
 
 #sidebar.hostMode {
   background-color: $secondary;
+
   li:not(.access-mode-container):not(.logout-container) {
     border-bottom: solid 1px $secondary-dark;
+
     &:hover,
     &._active {
       background-color: $secondary-dark;
     }
   }
+
   ._sidebar_brand {
     background: $secondary;
   }
+
   .access-mode-button {
     border: solid 2px $primary;
     background-color: $primary;
+
     &:hover {
       background-color: $primary-dark;
       border-color: $primary-dark;
     }
   }
+
   .logout-button {
     &:hover {
       background: $secondary-dark;
     }
   }
+
   ::-webkit-scrollbar-track {
     background: $secondary-light;
     box-shadow: inset 1px 1px 3px hsla(204, 50%, 39%, 0.8);
   }
+
   ::-webkit-scrollbar-thumb {
     background: $secondary-dark;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: $secondary-medium;
   }

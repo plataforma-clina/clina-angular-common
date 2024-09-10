@@ -1,10 +1,12 @@
 <ul
   id="sidebar"
   [ngClass]="{
-    show: (showNavbar$ | async),
+    show: (showNavbar$ | async) || isSidebarHovered,
     hostMode: (accessMode$ | async) === AccessModeEnum.HOST,
     psMode: (accessMode$ | async) === AccessModeEnum.HEALTH_PERSON
   }"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
   >
   <div class="_sidebar_brand">
     <div>
