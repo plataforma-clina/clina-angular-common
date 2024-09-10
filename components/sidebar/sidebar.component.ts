@@ -148,10 +148,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   goToPage(item: NavbarItemDto) {
+    debugger;
+    this.router.navigate([item.url], {replaceUrl: true});
     const sidebar = document.getElementById("sidebar");
-    this.router.navigate([item.url]);
 
-   // this.hideSidebar();
+   this.hideSidebar();
   }
 
   logout() {

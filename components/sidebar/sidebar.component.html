@@ -19,7 +19,7 @@
         class="d-flex justify-content-between w-100 p-3"
         style="margin-left: -.2em;"
         [class._active]="item.isActive"
-        [routerLink]="[item.url]" >
+        (click)="goToPage(item)">
         <div class="d-flex align-items-center">
           <img [src]="item.img" />
           <a class="ms-3 item-label">{{ item.title }}</a>
