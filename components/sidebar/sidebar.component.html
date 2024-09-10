@@ -14,9 +14,10 @@
   <div class="items-container">
     <li
       [style]="item.show ? 'display: block' : 'display: none'"
-      *ngFor="let item of items; let i = index"  (click)="goToPage(item)" [class._active]="item.isActive">
-      <div
+      *ngFor="let item of items; let i = index"  [class._active]="item.isActive">
+      <a
         class="d-flex justify-content-between w-100 p-3"
+        href="{{item.url}}" 
         style="margin-left: -.2em;"
        
        >
@@ -24,7 +25,7 @@
           <img [src]="item.img" />
           <a class="ms-3 item-label">{{ item.title }}</a>
         </div>
-      </div>
+      </a>
     </li>
 
     <li class="access-mode-container" *ngIf="isAuthenticated && accessMode === AccessModeEnum.HEALTH_PERSON">
