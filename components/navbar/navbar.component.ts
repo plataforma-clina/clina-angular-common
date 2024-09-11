@@ -18,7 +18,7 @@ import { SidebarService } from "../../services/sidebar.service";
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   accessMode: AccessModeEnum = AccessModeEnum.HEALTH_PERSON;
-
+  public isAuthenticated: boolean = false;
   psUrl = environment.psUrl;
   whatsappNumber = environment.whatsappNumber;
 
@@ -40,7 +40,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private readonly unleashService: UnleashService,
     private readonly notificationService: NotificationService,
     private readonly accessModeService: AccessModeService
-  ) {}
+  ) {
+    this.authenticationService.$authenticated.subscribe((auth) => (this.isAuthenticated = auth));
+  }
 
   ngOnInit(): void {
     this.accessModeService.$accessMode.subscribe(

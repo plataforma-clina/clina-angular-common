@@ -26,6 +26,7 @@
     >
     <a href="//blog.clina.care" class="link-blog" target="_blank" class="d-none d-xl-block">Blog</a>
     <a [routerLink]="['/about']" class="link-about" class="d-none d-xxl-block">Sobre nós</a>
+  
     <a
       href="https://wa.me/55{{
         whatsappNumber
@@ -42,14 +43,21 @@
     <a routerLink="/maleta">
       <img src="/common-assets/images/sidebar/icon-cart-white.svg" alt="Carrinho" width="30" />
     </a>
+
+    <a *ngIf="!isAuthenticated" [routerLink]="['/auth/sign-in']" class="link-login">
+      <i class="fas fa-user"></i>
+    </a>
     <div></div>
   </div>
 
-  <div class="_btn_collapse" (click)="showSidebar()">
-    <div class="_hamburguer">
+  <div class="_btn_collapse" >
+    <div *ngIf="isAuthenticated" class="_hamburguer" (click)="showSidebar()">
       <div></div>
       <div></div>
       <div></div>
     </div>
+    <a *ngIf="!isAuthenticated" [routerLink]="['/auth/sign-in']" class="link-login-mobile">
+      <i class="fas fa-user"></i>
+    </a>
   </div>
 </nav>
