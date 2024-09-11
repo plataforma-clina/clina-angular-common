@@ -1,7 +1,7 @@
 <ul
   id="sidebar"
   [ngClass]="{
-    show: (showNavbar$ | async) || (isSidebarHovered && !isMobile),
+    show: (showNavbar$ | async) || (!isMobile&&isSidebarHovered),
     hostMode: (accessMode$ | async) === AccessModeEnum.HOST,
     psMode: (accessMode$ | async) === AccessModeEnum.HEALTH_PERSON
   }"
@@ -18,7 +18,8 @@
       *ngFor="let item of (items$ | async)"
       [style]="item.show ? 'display: block' : 'display: none'"
       [routerLinkActive]="'_active'">
-      <a class="d-flex justify-content-between w-100 px-3 py-2" style="margin-left: -3px;" [routerLink]="[item.url]">
+      <a class="d-flex justify-content-between w-100 px-3 py-2" style="margin-left: -3px;"
+        (click)="(isMobile)?hideSidebar():null" [routerLink]="[item.url]">
         <div class="d-flex align-items-center">
           <img [src]="item.img" *ngIf="!item.icon" />
           <i class="clina {{item.icon}}" *ngIf="item.icon"></i>
