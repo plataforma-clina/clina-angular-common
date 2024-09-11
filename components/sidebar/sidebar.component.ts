@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public AccessModeEnum = AccessModeEnum;  // Exponha o enum para o template
   private accessModeSubject = new BehaviorSubject<AccessModeEnum>(AccessModeEnum.HEALTH_PERSON);
   accessMode$ = this.accessModeSubject.asObservable();
-
+  isMobile = false;
   showNavbar$!: Observable<boolean>;
   items$: Observable<NavbarItemDto[]>;
 
@@ -43,6 +43,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.showNavbar$ = this.sidebarService.$show; // Use o observable diretamente
 
+    if (PlatformUtils.isBrowser()) {
+      this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    }
     this.accessModeService.$accessMode.subscribe(
       (accessMode: AccessModeEnum) => {
         this.accessModeSubject.next(accessMode);
@@ -76,7 +79,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       {
         title: "Assinaturas",
         icon: "icon-calendar-check-2",
-        url: "/subscription",
+        url: "/subscription/management",
         isActive: false,
         show: accessMode === AccessModeEnum.HEALTH_PERSON,
       },
@@ -160,7 +163,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     else
       this.accessModeService.setMode(mode);
-   // this.accessModeService.setMode(mode);
+    // this.accessModeService.setMode(mode);
   }
   onMouseEnter() {
     this.isSidebarHovered = true;
