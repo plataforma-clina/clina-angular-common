@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { Router } from "@angular/router";
 import { environment } from "@environments/environment";
 import { AccessModeEnum } from "app/modules/account/enums/access-mode.enum";
@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";
 import { SidebarService } from "../../services/sidebar.service";
+import { AuthenticationService } from "app/modules/authentication/authentication.service";
 
 @Component({
   selector: "clina-sidebar",
@@ -25,10 +26,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private showNavbarSubscription?: Subscription;
   isSidebarHovered = false; // Controla se o sidebar está com hover
+  psUrl = environment.psUrl;
 
   constructor(
     private readonly sidebarService: SidebarService,
     private readonly router: Router,
+    private readonly authenticationService: AuthenticationService,
+    private readonly renderer: Renderer2,
     private readonly accessModeService: AccessModeService
   ) {
     this.items$ = this.accessMode$.pipe(
@@ -161,5 +165,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.showNavbarSubscription?.unsubscribe();
+    if (PlatformUtils.isBrowser())
+      this.renderer.removeClass(document.body, "no-scroll");
+  }
+
+  logout() {
+    this.authenticationService.signOut();
   }
 }
