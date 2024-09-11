@@ -6,8 +6,7 @@
     psMode: (accessMode$ | async) === AccessModeEnum.HEALTH_PERSON
   }"
   (mouseenter)="onMouseEnter()"
-  (mouseleave)="onMouseLeave()"
-  >
+  (mouseleave)="onMouseLeave()">
   <div class="_sidebar_brand">
     <div>
       <img src="/common-assets/images/branding/logo-white.svg" (click)="goToHome()" />
@@ -18,11 +17,11 @@
     <li
       *ngFor="let item of (items$ | async)"
       [style]="item.show ? 'display: block' : 'display: none'"
-      [class._active]="item.isActive"
-    >
-      <a class="d-flex justify-content-between w-100 p-3" [routerLink]="[item.url]">
+      [routerLinkActive]="'_active'">
+      <a class="d-flex justify-content-between w-100 px-3 py-2" style="margin-left: -3px;" [routerLink]="[item.url]">
         <div class="d-flex align-items-center">
-          <img [src]="item.img" />
+          <img [src]="item.img" *ngIf="!item.icon" />
+          <i class="clina {{item.icon}}" *ngIf="item.icon"></i>
           <span class="ms-3 item-label">{{ item.title }}</span>
         </div>
       </a>
@@ -63,4 +62,3 @@
     </li>
   </div>
 </ul>
-

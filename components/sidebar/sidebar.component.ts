@@ -3,12 +3,12 @@ import { Router } from "@angular/router";
 import { environment } from "@environments/environment";
 import { AccessModeEnum } from "app/modules/account/enums/access-mode.enum";
 import { AccessModeService } from "app/modules/account/services/access-mode.service";
+import { AuthenticationService } from "app/modules/authentication/authentication.service";
 import { PlatformUtils } from "app/utils/platform.util";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { NavbarItemDto } from "../../dtos/navbar-item.dto";
 import { SidebarService } from "../../services/sidebar.service";
-import { AuthenticationService } from "app/modules/authentication/authentication.service";
 
 @Component({
   selector: "clina-sidebar",
@@ -70,6 +70,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
         title: "Compras",
         img: "/common-assets/images/sidebar/icon-purchases-solid-white.svg",
         url: "/purchase",
+        isActive: false,
+        show: accessMode === AccessModeEnum.HEALTH_PERSON,
+      },
+      {
+        title: "Assinaturas",
+        icon: "icon-calendar-check-2",
+        url: "/subscription",
         isActive: false,
         show: accessMode === AccessModeEnum.HEALTH_PERSON,
       },

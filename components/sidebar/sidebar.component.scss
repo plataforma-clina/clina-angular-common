@@ -248,13 +248,19 @@
   background-color: white;
 
   li:not(.access-mode-container):not(.logout-container) {
-    border-left: 5px solid white;
-
+    border-left: 4px solid white;
+    margin-block: .5em;
     &:hover,
     &._active {
-      border-left: 5px solid $primary !important;
+      border-left: 4px solid $primary !important;
       background-color: white;
     }
+  }
+
+  i{
+    font-weight: 800;
+    font-size: 18px;
+    margin-left: 0px;
   }
 
   ._sidebar_brand {
