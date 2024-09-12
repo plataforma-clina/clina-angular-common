@@ -16,7 +16,7 @@
 
   <div class="d-flex align-items-center search-bar-container">
     <clina-navbar-search
-      *ngIf="accessMode === AccessModeEnum.HEALTH_PERSON"
+      *ngIf="accessMode === AccessModeEnum.HEALTH_PERSON && isSearchActive"
     ></clina-navbar-search>
   </div>
 
@@ -45,8 +45,8 @@
     <div></div>
   </div>
 
-  <div class="_btn_collapse" (click)="showSidebar()">
-    <div class="_hamburguer">
+  <div class="_btn_collapse" (click)="showSidebar()" >
+    <div class="_hamburguer" *ngIf="isAuthenticated">
       <div></div>
       <div></div>
       <div></div>

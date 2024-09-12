@@ -83,10 +83,10 @@
     cursor: pointer;
     div {
       background-color: white;
-      width: 32px;
-      height: 5px;
+      width: 26px;
+      height: 3px;
       border-radius: 2px;
-      margin: 5px 0;
+      margin: 6px 0;
       transition: width 500ms, margin-left 500ms;
     }
     &:hover {
