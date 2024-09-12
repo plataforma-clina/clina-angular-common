@@ -13,7 +13,7 @@
       <span class="close-sidebar" (click)="hideSidebar()">&times;</span>
     </div>
   </div>
-  <div class="items-container">
+  <div class="items-container" (click)="isMobile?hideSidebar():null">
     <li
       *ngFor="let item of (items$ | async)"
       [style]="item.show ? 'display: block' : 'display: none'"
