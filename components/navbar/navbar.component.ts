@@ -41,7 +41,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private readonly unleashService: UnleashService,
     private readonly notificationService: NotificationService,
     private readonly accessModeService: AccessModeService
-  ) {}
+  ) {
+    this.authenticationService.$authenticated.subscribe((auth) => (this.isAuthenticated = auth));
+  }
 
   ngOnInit(): void {
     this.accessModeService.$accessMode.subscribe(
