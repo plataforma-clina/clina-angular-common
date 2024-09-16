@@ -1,9 +1,9 @@
 import {
-    Component,
-    HostListener,
-    Input,
-    OnInit,
-    Renderer2,
+  Component,
+  HostListener,
+  Input,
+  OnInit,
+  Renderer2,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlatformUtils } from 'app/utils/platform.util';
@@ -158,10 +158,12 @@ export class NavbarSearchComponent implements OnInit {
       this.changeLocationKeyword('');
       this.openLocalization();
       return;
-    }    
-    
+    }
+
+    debugger;
+
     this.locationSelected = event;
-  
+
     await this.getCoordinates();
   }
 
@@ -367,6 +369,8 @@ export class NavbarSearchComponent implements OnInit {
     ) {
       await this.selectLocation(this.locationsList[0]);
     }
+
+    debugger
 
     const searchInput = Object.assign(this.searchInput as SearchInput, {
       begin: this.date
