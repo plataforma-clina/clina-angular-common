@@ -160,9 +160,8 @@ export class NavbarSearchComponent implements OnInit {
       return;
     }
 
-    debugger;
-
     this.locationSelected = event;
+    console.log('Selected location: ', event);
 
     await this.getCoordinates();
   }
@@ -378,24 +377,17 @@ export class NavbarSearchComponent implements OnInit {
         : moment().startOf('day').format(),
       end: moment(this.date).startOf('day').add(6, 'days').format(),
       city:
-        this.locationSelected &&
-          [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(
-            this.locationSelected.type
-          )
-          ? this.locationSelected.city
-          : undefined,
-      state:
-        this.locationSelected &&
-          [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(
-            this.locationSelected.type
-          )
-          ? this.locationSelected.state
-          : undefined,
-      neighborhood:
-        this.locationSelected &&
-          this.locationSelected.type === PlaceTypeEnum.NEIBHBORHOOD
-          ? this.locationSelected.neighborhood
-          : undefined,
+      this.locationSelected && [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(this.locationSelected.type)
+        ? this.locationSelected.city
+        : undefined,
+    state:
+      this.locationSelected && [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(this.locationSelected.type)
+        ? this.locationSelected.state
+        : undefined,
+    district:
+      this.locationSelected && this.locationSelected.type === PlaceTypeEnum.NEIBHBORHOOD
+        ? this.locationSelected.neighborhood
+        : undefined,
       googlePlace:
         this.locationSelected?.type === PlaceTypeEnum.GOOGLE_PLACES
           ? this.locationSelected.label
