@@ -228,7 +228,10 @@
     position: relative;
     text-align: center;
     border-radius: 50px;
-    border: solid 2px white !important;
+    border: solid 2px $primary-dark;
+    color:#ffffff;
+    background-color: $primary-dark;
+
 
     ._images_icon {
       margin-left: 6px;
@@ -278,7 +281,7 @@
   }
 
   .logout-button:hover {
-    background: $primary-dark;
+    opacity: 70%;
   }
 
   ::-webkit-scrollbar-track {
@@ -320,11 +323,10 @@
       border-color: $primary-dark;
     }
   }
-
+  
   .logout-button {
-    &:hover {
-      background: $secondary-dark;
-    }
+    background: $secondary-dark;
+    border: solid 2px $secondary-dark;
   }
 
   ::-webkit-scrollbar-track {
