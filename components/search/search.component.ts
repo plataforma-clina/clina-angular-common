@@ -1,9 +1,9 @@
 import {
-    Component,
-    HostListener,
-    Input,
-    OnInit,
-    Renderer2,
+  Component,
+  HostListener,
+  Input,
+  OnInit,
+  Renderer2,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlatformUtils } from 'app/utils/platform.util';
@@ -158,10 +158,11 @@ export class NavbarSearchComponent implements OnInit {
       this.changeLocationKeyword('');
       this.openLocalization();
       return;
-    }    
-    
+    }
+
     this.locationSelected = event;
-  
+    console.log('Selected location: ', event);
+
     await this.getCoordinates();
   }
 
@@ -368,30 +369,25 @@ export class NavbarSearchComponent implements OnInit {
       await this.selectLocation(this.locationsList[0]);
     }
 
+    debugger
+
     const searchInput = Object.assign(this.searchInput as SearchInput, {
       begin: this.date
         ? moment(this.date).format()
         : moment().startOf('day').format(),
       end: moment(this.date).startOf('day').add(6, 'days').format(),
       city:
-        this.locationSelected &&
-          [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(
-            this.locationSelected.type
-          )
-          ? this.locationSelected.city
-          : undefined,
-      state:
-        this.locationSelected &&
-          [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(
-            this.locationSelected.type
-          )
-          ? this.locationSelected.state
-          : undefined,
-      neighborhood:
-        this.locationSelected &&
-          this.locationSelected.type === PlaceTypeEnum.NEIBHBORHOOD
-          ? this.locationSelected.neighborhood
-          : undefined,
+      this.locationSelected && [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(this.locationSelected.type)
+        ? this.locationSelected.city
+        : undefined,
+    state:
+      this.locationSelected && [PlaceTypeEnum.CITY, PlaceTypeEnum.NEIBHBORHOOD].includes(this.locationSelected.type)
+        ? this.locationSelected.state
+        : undefined,
+    district:
+      this.locationSelected && this.locationSelected.type === PlaceTypeEnum.NEIBHBORHOOD
+        ? this.locationSelected.neighborhood
+        : undefined,
       googlePlace:
         this.locationSelected?.type === PlaceTypeEnum.GOOGLE_PLACES
           ? this.locationSelected.label
