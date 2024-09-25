@@ -146,8 +146,6 @@ export class NavbarSearchComponent implements OnInit {
       return;
     }
 
-    this.close();
-
     this.locationSelected = event;
     await this.getCoordinates();
   }
