@@ -10,6 +10,7 @@ import { environment } from "../../../../../environments/environment";
 import { AuthenticationService } from "../../../authentication/authentication.service";
 import { NotificationService } from "../../../notification/notification.service";
 import { SidebarService } from "../../services/sidebar.service";
+import { MaletaService } from "app/modules/maleta/maleta.service";
 
 @Component({
   selector: "clina-navbar",
@@ -34,13 +35,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
   AccessModeEnum = AccessModeEnum;
   pageTitleSubscription: Subscription;
 
+  private subs:Subscription[];
+  public schedulesCount:number=0;
+
   constructor(
     private readonly sidebarService: SidebarService,
     private readonly authenticationService: AuthenticationService,
     private readonly router: Router,
     private readonly unleashService: UnleashService,
     private readonly notificationService: NotificationService,
-    private readonly accessModeService: AccessModeService
+    private readonly accessModeService: AccessModeService,
+    private readonly maletaService:MaletaService
   ) {
     this.authenticationService.$authenticated.subscribe((auth) => (this.isAuthenticated = auth));
   }
@@ -51,6 +56,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.accessMode = accessMode;
       }
     );
+
+    this.subs = new Array<Subscription>();
+
+    let sub1 = this.maletaService.$schedules.subscribe(schedules=>{
+      this.schedulesCount = schedules?.length ? schedules.length : 0;
+    });
+    this.subs.push(sub1);
 
     this.notificationService.getNotifications().subscribe((notifications) => {
       this.notificationsCount =
@@ -69,6 +81,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.pageTitleSubscription?.unsubscribe();
+    this.subs.forEach(sub=>{
+      sub.unsubscribe();
+    })
   }
 
   goToHome() {

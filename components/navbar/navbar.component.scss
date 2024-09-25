@@ -141,3 +141,22 @@
     background: $secondary;
   }
 }
+
+.maleta-cart{
+  position: relative;
+}
+
+.badge-maleta-count{
+  position: absolute;
+  padding: 8px;
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+  background-color: $warning;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 10px;
+  top: -5px;
+  right: -5px;
+}
