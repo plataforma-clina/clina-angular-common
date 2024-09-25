@@ -377,6 +377,7 @@ export class NavbarSearchComponent implements OnInit {
     });
 
     this.router.navigate(['/room/list'], { queryParams: searchInput });
+    this.close();
   }
 
 }
